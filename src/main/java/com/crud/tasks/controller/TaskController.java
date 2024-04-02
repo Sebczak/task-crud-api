@@ -1,6 +1,10 @@
 package com.crud.tasks.controller;
 
+import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
+import com.crud.tasks.mapper.TaskMapper;
+import com.crud.tasks.service.DbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,14 +14,25 @@ import java.util.List;
 @RequestMapping(path = "api/v1/tasks")
 public class TaskController {
 
+    private final DbService dbService;
+    private final TaskMapper taskMapper;
+
+    @Autowired
+    public TaskController(DbService dbService, TaskMapper taskMapper) {
+        this.dbService = dbService;
+        this.taskMapper = taskMapper;
+    }
+
     @GetMapping
     public List<TaskDto> getTasks() {
-        return new ArrayList<>();
+        List<Task> tasks = dbService.getAllTasks();
+        return taskMapper.mapToTaskDtoList(tasks);
     }
 
     @GetMapping(value = "{taskId}")
     public TaskDto getTask(@PathVariable Long taskId) {
-        return new TaskDto(1L, "First task", "Content of the task");
+        Task task = dbService.getTask(taskId);
+        return taskMapper.mapToTaskDto(task);
     }
 
     @PostMapping
