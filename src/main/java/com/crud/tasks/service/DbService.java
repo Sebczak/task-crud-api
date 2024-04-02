@@ -1,12 +1,12 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.domain.Task;
+import com.crud.tasks.exceptions.TaskNotFoundException;
 import com.crud.tasks.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DbService {
@@ -22,13 +22,15 @@ public class DbService {
         return taskRepository.findAll();
     }
 
-    public Task getTask(Long taskId) {
-        Optional<Task> task = taskRepository.findById(taskId);
+    public Task getTask(Long taskId) throws TaskNotFoundException {
+        return taskRepository.findById(taskId).orElseThrow(TaskNotFoundException::new);
+    }
 
-        if (task.isPresent()) {
-            return task.get();
-        } else {
-            throw new IllegalStateException(String.format("Task with id: %s does not exist", taskId));
-        }
+    public Task saveTask(Task task) {
+        return taskRepository.save(task);
+    }
+
+    public void deleteTask(Long taskId) {
+        taskRepository.deleteById(taskId);
     }
 }

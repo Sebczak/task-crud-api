@@ -23,4 +23,13 @@ public class TaskDto {
     public String getContent() {
         return content;
     }
+
+    @Override
+    public String toString() {
+        return "TaskDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }
