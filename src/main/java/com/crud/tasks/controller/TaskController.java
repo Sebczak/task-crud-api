@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/tasks")
+@RequestMapping(path = "v1/tasks")
+@CrossOrigin("*")
 public class TaskController {
 
     private final DbService dbService;
