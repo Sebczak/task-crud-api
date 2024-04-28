@@ -18,15 +18,7 @@ public class TrelloService {
     }
 
     public List<TrelloBoardDto> getTrelloBoards() {
-        List<TrelloBoardDto> boards = trelloClient.getTrelloBoards();
-
-        List<TrelloBoardDto> filteredBoards = boards.stream()
-                .filter(board -> board.getName().contains("Kodilla"))
-                .toList();
-
-        System.out.println(filteredBoards);
-
-        return boards;
+        return trelloClient.getTrelloBoards();
     }
 
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
