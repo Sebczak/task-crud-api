@@ -1,0 +1,8 @@
+run = ["./gradlew", "bootRun"]
+
+[nix]
+channel = "stable-21_11"
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
