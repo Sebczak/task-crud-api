@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TrelloService {
+public class OldTrelloService {
 
     private final TrelloClient trelloClient;
 
-    public TrelloService(TrelloClient trelloClient) {
+    public OldTrelloService(TrelloClient trelloClient) {
         this.trelloClient = trelloClient;
     }
 
