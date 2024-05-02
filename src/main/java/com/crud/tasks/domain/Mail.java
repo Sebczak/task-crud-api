@@ -16,9 +16,6 @@ public class Mail {
     private String message;
 
     public Mail(String mailTo, String subject, String message) {
-        this.mailTo = mailTo;
-        toCc = null;
-        this.subject = subject;
-        this.message = message;
+        this(mailTo, null, subject, message);
     }
 }
