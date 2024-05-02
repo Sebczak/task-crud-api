@@ -42,8 +42,6 @@ public class TaskController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
-        System.out.println(taskDto);
-        System.out.println(task);
         dbService.saveTask(task);
         return ResponseEntity.ok().build();
     }
