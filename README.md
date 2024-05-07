@@ -1,6 +1,6 @@
 # Task List API
 
-The Todo List API is a RESTful web service built with Java and Spring Boot, allowing users to manage their tasks. It provides endpoints for creating tasks, retrieving tasks, and more. This API also integrates with Trello API, enabling users to send tasks directly to Trello boards if desired.
+The Todo List API is a RESTful web service built with Java and Spring Boot, allowing users to manage their tasks. It provides endpoints for creating tasks, retrieving tasks, and more. This API also integrates with Trello API, enabling users to send tasks directly to Trello boards if desired. The application is also deployed on Replit in order to work as app, however Replit has some limitations for free users(The build only persists for 1 hour and then the build is going to shut down).
 When the card is send to Trello selected Trello board, the user gets a prompt with link when the card was moved to.
 ##Features
 
@@ -43,7 +43,9 @@ The API documentation is available via Swagger UI. You can access it here.
 Swagger link will work when the build will run localy.
 ## Frontend
 
-The frontend for the Todo List application is built using JavaScript and jQuery. Below are some screenshots of how the app looks:
+The frontend for the Todo List application is built using JavaScript and jQuery. Frontend code is in src/frontend/ path or on [GitHub Pages](https://github.com/Sebczak/Sebczak.github.io). 
+Frontend can be visible [here](https://sebczak.github.io/)
+Below are some screenshots of how the app looks:
 ![Screenshot 2024-05-07 at 21-56-11 CRUD](https://github.com/Sebczak/task-crud-api/assets/33517299/9b9bbe2b-1eba-477d-a998-43575139cd58)
 ![Screenshot 2024-05-07 at 22-00-31 CRUD](https://github.com/Sebczak/task-crud-api/assets/33517299/90067972-7c33-4fda-b51f-3439fe37ecf7)
 ![Screenshot 2024-05-07 at 22-00-55 CRUD](https://github.com/Sebczak/task-crud-api/assets/33517299/13c76e27-9759-46e7-9c92-d7a5729e80a8)
