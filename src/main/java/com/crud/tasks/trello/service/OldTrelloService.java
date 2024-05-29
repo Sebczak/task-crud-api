@@ -1,6 +1,6 @@
 package com.crud.tasks.trello.service;
 
-import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.client.TrelloClient;
@@ -21,7 +21,7 @@ public class OldTrelloService {
         return trelloClient.getTrelloBoards();
     }
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+    public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {
         return trelloClient.createNewCard(trelloCardDto);
     }
 }
