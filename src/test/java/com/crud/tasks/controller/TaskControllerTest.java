@@ -4,6 +4,7 @@ import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -59,14 +61,22 @@ class TaskControllerTest {
         );
         when(dbService.getAllTasks()).thenReturn(toDoTasks);
         when(taskMapper.mapToTaskDtoList(toDoTasks)).thenReturn(toDoTasksDto);
+        ObjectMapper objectMapper = new ObjectMapper();
 
         //When & Then
-        mockMvc.perform(MockMvcRequestBuilders
+        String result = mockMvc.perform(MockMvcRequestBuilders
                         .get("/v1/tasks")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].title", Matchers.is("todo")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].content", Matchers.is("todo description")));
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        var responseTasks = objectMapper.readValue(result, TaskDto[].class);
+
+        assertEquals(2, responseTasks.length);
+        assertEquals(1L, responseTasks[0].getId());
+        assertEquals("todo", responseTasks[0].getTitle());
+        assertEquals("todo description", responseTasks[0].getContent());
     }
 
     @Test
@@ -114,8 +124,8 @@ class TaskControllerTest {
         TaskDto taskDto = new TaskDto(1L, "updated task", "todo descriptiondto");
 
         when(taskMapper.mapToTask(taskDto)).thenReturn(task);
-        when(dbService.saveTask(task)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
+        when(dbService.saveTask(task)).thenReturn(task);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
